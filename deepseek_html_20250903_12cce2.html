@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendas do Curso - DevRise</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            font-size: 2rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .nav-links li {
+            margin: 0 5px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            display: block;
+            font-weight: 500;
+        }
+        
+        .nav-links a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-links a.active {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-left: 10px;
+        }
+        
+        .btn-outline {
+            border: 2px solid white;
+            color: white;
+            background: transparent;
+        }
+        
+        .btn-outline:hover {
+            background: white;
+            color: #6a11cb;
+        }
+        
+        /* Page Title */
+        .page-title {
+            text-align: center;
+            padding: 40px 0;
+            background: white;
+            margin: 30px 0;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .page-title h1 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .page-title p {
+            font-size: 1.2rem;
+            color: #7f8c8d;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Sales Dashboard */
+        .sales-dashboard {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin: 50px 0;
+        }
+        
+        .sales-card {
+            flex: 1;
+            min-width: 300px;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .sales-card h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f1f1f1;
+        }
+        
+        .stat {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #f1f1f1;
+        }
+        
+        .stat:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .stat-value {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #3498db;
+        }
+        
+        /* Footer */
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 40px 0;
+            margin-top: 50px;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 300px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 20px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                margin-top: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-links li {
+                margin: 5px;
+            }
+            
+            .page-title h1 {
+                font-size: 2rem;
+            }
+            
+            .page-title p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-code"></i>
+                    DevRise
+                </a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="vendas.html" class="active">Vendas</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="relatorios.html">Relatórios</a></li>
+                    <li><a href="suporte.html">Suporte</a></li>
+                    <li><a href="https://kzin82666-hub.github.io/Deep/" target="_blank">Deep</a></li>
+                    <li><a href="https://github.com/kzin82666-hub/Dev" target="_blank">GitHub Repo</a></li>
+                </ul>
+                <div>
+                    <a href="#" class="btn btn-outline">
+                        <i class="fas fa-sign-out-alt"></i> Sair
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Page Title -->
+        <section class="page-title">
+            <h1>Dashboard de Vendas</h1>
+            <p>Acompanhe o desempenho de vendas dos seus cursos e gerencie suas finanças</p>
+        </section>
+
+        <!-- Sales Dashboard -->
+        <section class="sales-dashboard">
+            <div class="sales-card">
+                <h2>Visão Geral</h2>
+                <div class="stat">
+                    <span>Vendas do Mês</span>
+                    <span class="stat-value">R$ 12.567,00</span>
+                </div>
+                <div class="stat">
+                    <span>Total de Vendas</span>
+                    <span class="stat-value">R$ 89.432,00</span>
+                </div>
+                <div class="stat">
+                    <span>Comissão</span>
+                    <span class="stat-value">R$ 26.829,60</span>
+                </div>
+                <div class="stat">
+                    <span>Alunos Novos</span>
+                    <span class="stat-value">143</span>
+                </div>
+            </div>
+            
+            <div class="sales-card">
+                <h2>Top Cursos</h2>
+                <div class="stat">
+                    <span>Web Development</span>
+                    <span class="stat-value">R$ 34.200,00</span>
+                </div>
+                <div class="stat">
+                    <span>Data Science</span>
+                    <span class="stat-value">R$ 28.750,00</span>
+                </div>
+                <div class="stat">
+                    <span>UX/UI Design</span>
+                    <span class="stat-value">R$ 15.340,00</span>
+                </div>
+                <div class="stat">
+                    <span>Mobile Development</span>
+                    <span class="stat-value">R$ 11.142,00</span>
+                </div>
+            </div>
+            
+            <div class="sales-card">
+                <h2>Metas</h2>
+                <div class="stat">
+                    <span>Meta Mensal</span>
+                    <span class="stat-value">R$ 15.000,00</span>
+                </div>
+                <div class="stat">
+                    <span>Progresso</span>
+                    <span class="stat-value">83.8%</span>
+                </div>
+                <div class="stat">
+                    <span>Dias Restantes</span>
+                    <span class="stat-value">12</span>
+                </div>
+                <div class="stat">
+                    <span>Previsão</span>
+                    <span class="stat-value">R$ 17.890,00</span>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>DevRise</h3>
+                    <p>Plataforma de cursos online com foco em tecnologia e pagamento via PIX.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Links Rápidos</h3>
+                    <p><a href="index.html">Início</a></p>
+                    <p><a href="vendas.html">Vendas</a></p>
+                    <p><a href="dashboard.html">Dashboard</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3>Suporte</h3>
+                    <p><i class="fas fa-envelope"></i> suporte@devrise.com</p>
+                    <p><i class="fas fa-phone"></i> (11) 98888-7777</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 DevRise - Todos os direitos reservados</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
