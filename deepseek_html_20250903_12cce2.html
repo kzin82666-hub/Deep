@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vendas de Cursos - DevRise</title>
+    <title>Vendas do Curso - DevRise</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -88,7 +88,8 @@
             font-size: 16px;
         }
 
-        .nav-links a:hover, .nav-links a.active {
+        .nav-links a:hover,
+        .nav-links a.active {
             color: var(--secondary);
         }
 
@@ -136,16 +137,6 @@
             color: white;
         }
 
-        .btn-success {
-            background-color: var(--success);
-            box-shadow: 0 4px 6px rgba(16, 185, 129, 0.2);
-        }
-
-        .btn-success:hover {
-            background-color: #059669;
-            box-shadow: 0 6px 12px rgba(16, 185, 129, 0.25);
-        }
-
         .btn-whatsapp {
             background-color: #25D366;
             box-shadow: 0 4px 6px rgba(37, 211, 102, 0.2);
@@ -156,17 +147,26 @@
             box-shadow: 0 6px 12px rgba(37, 211, 102, 0.25);
         }
 
+        .btn-success {
+            background-color: var(--success);
+            box-shadow: 0 4px 6px rgba(16, 185, 129, 0.2);
+        }
+
+        .btn-success:hover {
+            background-color: #059669;
+            box-shadow: 0 6px 12px rgba(16, 185, 129, 0.25);
+        }
+
         /* Page Header */
         .page-header {
             background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 100%);
             color: white;
-            padding: 80px 0;
+            padding: 60px 0;
             margin-bottom: 40px;
-            text-align: center;
         }
 
         .page-title {
-            font-size: 2.8rem;
+            font-size: 2.5rem;
             margin-bottom: 15px;
         }
 
@@ -174,14 +174,13 @@
             font-size: 1.2rem;
             color: var(--light);
             max-width: 700px;
-            margin: 0 auto;
         }
 
         /* Dashboard Cards */
         .dashboard-cards {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
+            gap: 20px;
             margin-bottom: 40px;
         }
 
@@ -189,15 +188,13 @@
             background: white;
             border-radius: 12px;
             padding: 25px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
             text-align: center;
-            transition: transform 0.3s, box-shadow 0.3s;
-            border: 1px solid #e2e8f0;
+            transition: transform 0.3s;
         }
 
         .dashboard-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
         }
 
         .dashboard-card h3 {
@@ -210,7 +207,6 @@
             font-size: 32px;
             font-weight: 700;
             color: var(--primary);
-            margin: 10px 0;
         }
 
         .dashboard-card.trending .number {
@@ -221,31 +217,23 @@
             color: var(--warning);
         }
 
-        .dashboard-card p {
-            color: var(--gray);
-            font-size: 14px;
-            margin-top: 10px;
-        }
-
         /* Filters */
         .filters {
             background: white;
             border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
             margin-bottom: 30px;
             display: flex;
             flex-wrap: wrap;
-            gap: 20px;
+            gap: 15px;
             align-items: center;
-            border: 1px solid #e2e8f0;
         }
 
         .filter-group {
             display: flex;
             flex-direction: column;
             min-width: 200px;
-            flex: 1;
         }
 
         .filter-group label {
@@ -256,17 +244,10 @@
 
         .filter-group select,
         .filter-group input {
-            padding: 12px 15px;
+            padding: 10px 12px;
             border: 1px solid #ddd;
             border-radius: 6px;
             font-size: 16px;
-            transition: border-color 0.3s;
-        }
-
-        .filter-group select:focus,
-        .filter-group input:focus {
-            border-color: var(--primary);
-            outline: none;
         }
 
         /* Sales Table */
@@ -274,10 +255,9 @@
             background: white;
             border-radius: 12px;
             padding: 30px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
             margin-bottom: 40px;
             overflow-x: auto;
-            border: 1px solid #e2e8f0;
         }
 
         .table-header {
@@ -285,6 +265,8 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 15px;
         }
 
         .table-title {
@@ -308,7 +290,6 @@
             font-weight: 600;
             color: var(--dark);
             cursor: pointer;
-            position: relative;
         }
 
         th:hover {
@@ -354,8 +335,7 @@
             background: white;
             border-radius: 12px;
             padding: 30px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
         }
 
         .chart-title {
@@ -373,12 +353,6 @@
             justify-content: center;
             color: var(--gray);
             font-size: 18px;
-            flex-direction: column;
-        }
-
-        .chart-placeholder i {
-            font-size: 40px;
-            margin-bottom: 15px;
         }
 
         /* Footer */
@@ -494,7 +468,6 @@
             .table-header {
                 flex-direction: column;
                 align-items: flex-start;
-                gap: 15px;
             }
         }
     </style>
@@ -512,15 +485,12 @@
                     <li><a href="index.html">Início</a></li>
                     <li><a href="vendas.html" class="active">Vendas</a></li>
                     <li><a href="dashboard.html">Dashboard</a></li>
-                    <li><a href="#">Para Instrutores</a></li>
-                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Relatórios</a></li>
+                    <li><a href="#">Suporte</a></li>
                 </ul>
                 <div>
                     <a href="#" class="btn btn-outline">
-                        <i class="fas fa-sign-in-alt"></i>Entrar
-                    </a>
-                    <a href="#" class="btn btn-secondary">
-                        <i class="fas fa-user-plus"></i>Cadastrar
+                        <i class="fas fa-sign-out-alt"></i>Sair
                     </a>
                 </div>
             </nav>
@@ -611,7 +581,7 @@
             <div class="table-header">
                 <h2 class="table-title">Histórico de Vendas</h2>
                 <div>
-                    <input type="text" placeholder="Buscar venda..." style="padding: 12px 15px; border: 1px solid #ddd; border-radius: 6px; margin-right: 10px; width: 250px;">
+                    <input type="text" placeholder="Buscar venda..." style="padding: 10px; border: 1px solid #ddd; border-radius: 6px; margin-right: 10px;">
                     <button class="btn btn-outline">
                         <i class="fas fa-sync-alt"></i>
                     </button>
@@ -639,7 +609,7 @@
                         <td>PIX</td>
                         <td><span class="status completed">Concluído</span></td>
                         <td>
-                            <button class="btn-outline" style="padding: 8px 12px;">
+                            <button class="btn-outline" style="padding: 5px 10px;">
                                 <i class="fas fa-eye"></i>
                             </button>
                         </td>
@@ -652,7 +622,7 @@
                         <td>Cartão de Crédito</td>
                         <td><span class="status completed">Concluído</span></td>
                         <td>
-                            <button class="btn-outline" style="padding: 8px 12px;">
+                            <button class="btn-outline" style="padding: 5px 10px;">
                                 <i class="fas fa-eye"></i>
                             </button>
                         </td>
@@ -665,7 +635,7 @@
                         <td>PIX</td>
                         <td><span class="status pending">Pendente</span></td>
                         <td>
-                            <button class="btn-outline" style="padding: 8px 12px;">
+                            <button class="btn-outline" style="padding: 5px 10px;">
                                 <i class="fas fa-eye"></i>
                             </button>
                         </td>
@@ -678,7 +648,7 @@
                         <td>Boleto</td>
                         <td><span class="status completed">Concluído</span></td>
                         <td>
-                            <button class="btn-outline" style="padding: 8px 12px;">
+                            <button class="btn-outline" style="padding: 5px 10px;">
                                 <i class="fas fa-eye"></i>
                             </button>
                         </td>
@@ -691,7 +661,7 @@
                         <td>Cartão de Crédito</td>
                         <td><span class="status refunded">Reembolsado</span></td>
                         <td>
-                            <button class="btn-outline" style="padding: 8px 12px;">
+                            <button class="btn-outline" style="padding: 5px 10px;">
                                 <i class="fas fa-eye"></i>
                             </button>
                         </td>
@@ -704,7 +674,7 @@
                         <td>PIX</td>
                         <td><span class="status completed">Concluído</span></td>
                         <td>
-                            <button class="btn-outline" style="padding: 8px 12px;">
+                            <button class="btn-outline" style="padding: 5px 10px;">
                                 <i class="fas fa-eye"></i>
                             </button>
                         </td>
@@ -717,7 +687,7 @@
                         <td>Cartão de Crédito</td>
                         <td><span class="status completed">Concluído</span></td>
                         <td>
-                            <button class="btn-outline" style="padding: 8px 12px;">
+                            <button class="btn-outline" style="padding: 5px 10px;">
                                 <i class="fas fa-eye"></i>
                             </button>
                         </td>
@@ -730,7 +700,7 @@
                         <td>PIX</td>
                         <td><span class="status completed">Concluído</span></td>
                         <td>
-                            <button class="btn-outline" style="padding: 8px 12px;">
+                            <button class="btn-outline" style="padding: 5px 10px;">
                                 <i class="fas fa-eye"></i>
                             </button>
                         </td>
@@ -759,14 +729,14 @@
             <div class="chart-container">
                 <h3 class="chart-title">Vendas por Curso</h3>
                 <div class="chart-placeholder">
-                    <i class="fas fa-chart-pie"></i>
+                    <i class="fas fa-chart-pie" style="font-size: 40px; margin-right: 15px;"></i>
                     Gráfico de Pizza - Distribuição de Vendas por Curso
                 </div>
             </div>
             <div class="chart-container">
                 <h3 class="chart-title">Evolução de Vendas (Últimos 30 dias)</h3>
                 <div class="chart-placeholder">
-                    <i class="fas fa-chart-line"></i>
+                    <i class="fas fa-chart-line" style="font-size: 40px; margin-right: 15px;"></i>
                     Gráfico de Linha - Evolução de Vendas ao Longo do Tempo
                 </div>
             </div>
@@ -785,6 +755,7 @@
                         <a href="#"><i class="fab fa-linkedin-in"></i></a>
                         <a href="#"><i class="fab fa-github"></i></a>
                         <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="https://wa.me/5562992628445" target="_blank"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
 
@@ -815,6 +786,7 @@
                     <ul>
                         <li><i class="fas fa-envelope"></i> contato@devrise.com</li>
                         <li><i class="fas fa-phone"></i> (11) 99999-9999</li>
+                        <li><i class="fab fa-whatsapp"></i> (62) 99926-28445</li>
                         <li><i class="fas fa-map-marker-alt"></i> São Paulo, Brasil</li>
                     </ul>
                 </div>
@@ -860,21 +832,6 @@
             exportBtn.addEventListener('click', () => {
                 alert('Exportando dados de vendas... Em uma implementação real, um arquivo CSV seria gerado para download.');
             });
-
-            // Simulação de login
-            const loginBtn = document.querySelector('.btn-outline');
-            if (loginBtn && loginBtn.textContent.includes('Entrar')) {
-                loginBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const email = prompt('Digite seu email:');
-                    const password = prompt('Digite sua senha:');
-
-                    if (email && password) {
-                        alert('Login realizado com sucesso! Redirecionando para o dashboard...');
-                        window.location.href = "dashboard.html";
-                    }
-                });
-            }
         });
     </script>
 </body>
