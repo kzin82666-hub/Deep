@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendas do Curso - DevRise</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #8b5cf6;
+            --accent: #ec4899;
+            --dark: #1e293b;
+            --darker: #0f172a;
+            --light: #f1f5f9;
+            --gray: #94a3b8;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--darker);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 24px;
+            font-weight: 800;
+            color: white;
+            text-decoration: none;
+        }
+
+        .logo i {
+            color: var(--secondary);
+            margin-right: 10px;
+            font-size: 28px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 25px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--light);
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 16px;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-decoration: none;
+            box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);
+        }
+
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(37, 99, 235, 0.25);
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary);
+            box-shadow: 0 4px 6px rgba(139, 92, 246, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background-color: #7c3aed;
+            box-shadow: 0 6px 12px rgba(139, 92, 246, 0.25);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            box-shadow: none;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-whatsapp {
+            background-color: #25D366;
+            box-shadow: 0 4px 6px rgba(37, 211, 102, 0.2);
+        }
+
+        .btn-whatsapp:hover {
+            background-color: #128C7E;
+            box-shadow: 0 6px 12px rgba(37, 211, 102, 0.25);
+        }
+
+        .btn-success {
+            background-color: var(--success);
+            box-shadow: 0 4px 6px rgba(16, 185, 129, 0.2);
+        }
+
+        .btn-success:hover {
+            background-color: #059669;
+            box-shadow: 0 6px 12px rgba(16, 185, 129, 0.25);
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 100%);
+            color: white;
+            padding: 60px 0;
+            margin-bottom: 40px;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .page-description {
+            font-size: 1.2rem;
+            color: var(--light);
+            max-width: 700px;
+        }
+
+        /* Dashboard Cards */
+        .dashboard-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .dashboard-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .dashboard-card h3 {
+            font-size: 16px;
+            color: var(--gray);
+            margin-bottom: 10px;
+        }
+
+        .dashboard-card .number {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .dashboard-card.trending .number {
+            color: var(--success);
+        }
+
+        .dashboard-card.warning .number {
+            color: var(--warning);
+        }
+
+        /* Filters */
+        .filters {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            min-width: 200px;
+        }
+
+        .filter-group label {
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .filter-group select,
+        .filter-group input {
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
+        /* Sales Table */
+        .sales-table-container {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            margin-bottom: 40px;
+            overflow-x: auto;
+        }
+
+        .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .table-title {
+            font-size: 22px;
+            color: var(--dark);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        th {
+            background-color: #f8fafc;
+            font-weight: 600;
+            color: var(--dark);
+            cursor: pointer;
+        }
+
+        th:hover {
+            background-color: #f1f5f9;
+        }
+
+        tr:hover {
+            background-color: #f8fafc;
+        }
+
+        .status {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            display: inline-block;
+        }
+
+        .status.completed {
+            background-color: #dcfce7;
+            color: #166534;
+        }
+
+        .status.pending {
+            background-color: #fef3c7;
+            color: #92400e;
+        }
+
+        .status.refunded {
+            background-color: #fee2e2;
+            color: #991b1b;
+        }
+
+        /* Charts Section */
+        .charts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .chart-container {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .chart-title {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        .chart-placeholder {
+            height: 300px;
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+            font-size: 18px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--darker);
+            color: white;
+            padding: 70px 0 20px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 50px;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 200px;
+            margin-bottom: 30px;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 20px;
+            font-size: 18px;
+            color: var(--light);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-column a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column a:hover {
+            color: white;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .charts {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+            }
+
+            .nav-links {
+                margin-top: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .nav-links li {
+                margin: 10px 15px;
+            }
+
+            .filters {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .filter-group {
+                width: 100%;
+            }
+
+            .page-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">
+                    <i class="fas fa-code"></i>
+                    DevRise
+                </a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="vendas.html" class="active">Vendas</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="#">Relatórios</a></li>
+                    <li><a href="#">Suporte</a></li>
+                </ul>
+                <div>
+                    <a href="#" class="btn btn-outline">
+                        <i class="fas fa-sign-out-alt"></i>Sair
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">Relatório de Vendas</h1>
+            <p class="page-description">Acompanhe o desempenho de vendas dos seus cursos, visualize métricas importantes e analise o crescimento da sua receita.</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Dashboard Cards -->
+        <div class="dashboard-cards">
+            <div class="dashboard-card">
+                <h3>Vendas Totais</h3>
+                <div class="number">247</div>
+                <p>+12% em relação ao mês anterior</p>
+            </div>
+            <div class="dashboard-card trending">
+                <h3>Receita Total</h3>
+                <div class="number">R$ 42.580</div>
+                <p>+18% em relação ao mês anterior</p>
+            </div>
+            <div class="dashboard-card">
+                <h3>Taxa de Conversão</h3>
+                <div class="number">8.7%</div>
+                <p>+2.3% em relação ao mês anterior</p>
+            </div>
+            <div class="dashboard-card warning">
+                <h3>Reembolsos</h3>
+                <div class="number">12</div>
+                <p>3.2% do total de vendas</p>
+            </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="filters">
+            <div class="filter-group">
+                <label for="date-range">Período</label>
+                <select id="date-range">
+                    <option value="7">Últimos 7 dias</option>
+                    <option value="30" selected>Últimos 30 dias</option>
+                    <option value="90">Últimos 3 meses</option>
+                    <option value="365">Último ano</option>
+                    <option value="custom">Personalizado</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="course-filter">Curso</label>
+                <select id="course-filter">
+                    <option value="all">Todos os cursos</option>
+                    <option value="react">React Avançado</option>
+                    <option value="node">Node.js para Iniciantes</option>
+                    <option value="python">Python para Data Science</option>
+                    <option value="ux">UX/UI Design</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="status-filter">Status</label>
+                <select id="status-filter">
+                    <option value="all">Todos os status</option>
+                    <option value="completed">Concluído</option>
+                    <option value="pending">Pendente</option>
+                    <option value="refunded">Reembolsado</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>&nbsp;</label>
+                <button class="btn">
+                    <i class="fas fa-filter"></i> Aplicar Filtros
+                </button>
+            </div>
+            <div class="filter-group">
+                <label>&nbsp;</label>
+                <button class="btn btn-outline">
+                    <i class="fas fa-download"></i> Exportar Dados
+                </button>
+            </div>
+        </div>
+
+        <!-- Sales Table -->
+        <div class="sales-table-container">
+            <div class="table-header">
+                <h2 class="table-title">Histórico de Vendas</h2>
+                <div>
+                    <input type="text" placeholder="Buscar venda..." style="padding: 10px; border: 1px solid #ddd; border-radius: 6px; margin-right: 10px;">
+                    <button class="btn btn-outline">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+                </div>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Data <i class="fas fa-sort"></i></th>
+                        <th>Curso <i class="fas fa-sort"></i></th>
+                        <th>Aluno</th>
+                        <th>Valor <i class="fas fa-sort"></i></th>
+                        <th>Método de Pagamento</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>15/05/2023</td>
+                        <td>React Avançado</td>
+                        <td>Maria Silva</td>
+                        <td>R$ 297,00</td>
+                        <td>PIX</td>
+                        <td><span class="status completed">Concluído</span></td>
+                        <td>
+                            <button class="btn-outline" style="padding: 5px 10px;">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>14/05/2023</td>
+                        <td>Node.js para Iniciantes</td>
+                        <td>João Santos</td>
+                        <td>R$ 197,00</td>
+                        <td>Cartão de Crédito</td>
+                        <td><span class="status completed">Concluído</span></td>
+                        <td>
+                            <button class="btn-outline" style="padding: 5px 10px;">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>13/05/2023</td>
+                        <td>Python para Data Science</td>
+                        <td>Ana Costa</td>
+                        <td>R$ 347,00</td>
+                        <td>PIX</td>
+                        <td><span class="status pending">Pendente</span></td>
+                        <td>
+                            <button class="btn-outline" style="padding: 5px 10px;">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>12/05/2023</td>
+                        <td>UX/UI Design</td>
+                        <td>Pedro Almeida</td>
+                        <td>R$ 247,00</td>
+                        <td>Boleto</td>
+                        <td><span class="status completed">Concluído</span></td>
+                        <td>
+                            <button class="btn-outline" style="padding: 5px 10px;">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>11/05/2023</td>
+                        <td>React Avançado</td>
+                        <td>Carla Mendonça</td>
+                        <td>R$ 297,00</td>
+                        <td>Cartão de Crédito</td>
+                        <td><span class="status refunded">Reembolsado</span></td>
+                        <td>
+                            <button class="btn-outline" style="padding: 5px 10px;">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>10/05/2023</td>
+                        <td>Node.js para Iniciantes</td>
+                        <td>Ricardo Oliveira</td>
+                        <td>R$ 197,00</td>
+                        <td>PIX</td>
+                        <td><span class="status completed">Concluído</span></td>
+                        <td>
+                            <button class="btn-outline" style="padding: 5px 10px;">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>09/05/2023</td>
+                        <td>Python para Data Science</td>
+                        <td>Fernanda Lima</td>
+                        <td>R$ 347,00</td>
+                        <td>Cartão de Crédito</td>
+                        <td><span class="status completed">Concluído</span></td>
+                        <td>
+                            <button class="btn-outline" style="padding: 5px 10px;">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>08/05/2023</td>
+                        <td>UX/UI Design</td>
+                        <td>Roberto Santos</td>
+                        <td>R$ 247,00</td>
+                        <td>PIX</td>
+                        <td><span class="status completed">Concluído</span></td>
+                        <td>
+                            <button class="btn-outline" style="padding: 5px 10px;">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
+                <div>Mostrando 8 de 247 resultados</div>
+                <div style="display: flex; gap: 10px;">
+                    <button class="btn-outline">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="btn">1</button>
+                    <button class="btn-outline">2</button>
+                    <button class="btn-outline">3</button>
+                    <button class="btn-outline">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Section -->
+        <div class="charts">
+            <div class="chart-container">
+                <h3 class="chart-title">Vendas por Curso</h3>
+                <div class="chart-placeholder">
+                    <i class="fas fa-chart-pie" style="font-size: 40px; margin-right: 15px;"></i>
+                    Gráfico de Pizza - Distribuição de Vendas por Curso
+                </div>
+            </div>
+            <div class="chart-container">
+                <h3 class="chart-title">Evolução de Vendas (Últimos 30 dias)</h3>
+                <div class="chart-placeholder">
+                    <i class="fas fa-chart-line" style="font-size: 40px; margin-right: 15px;"></i>
+                    Gráfico de Linha - Evolução de Vendas ao Longo do Tempo
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>DevRise</h3>
+                    <p>Plataforma de cursos para desenvolvedores que desejam compartilhar conhecimento e gerar renda.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="https://wa.me/5562992628445" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Links Rápidos</h3>
+                    <ul>
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="vendas.html">Vendas</a></li>
+                        <li><a href="dashboard.html">Dashboard</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Contato</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Recursos</h3>
+                    <ul>
+                        <li><a href="#">Central de Ajuda</a></li>
+                        <li><a href="#">Políticas de Privacidade</a></li>
+                        <li><a href="#">Termos de Uso</a></li>
+                        <li><a href="#">Tornar-se Instrutor</a></li>
+                        <li><a href="#">Preços e Comissões</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Contato</h3>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> contato@devrise.com</li>
+                        <li><i class="fas fa-phone"></i> (11) 99999-9999</li>
+                        <li><i class="fab fa-whatsapp"></i> (62) 99926-28445</li>
+                        <li><i class="fas fa-map-marker-alt"></i> São Paulo, Brasil</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2023 DevRise - Todos os direitos reservados</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simulação de funcionalidades da página
+        document.addEventListener('DOMContentLoaded', function() {
+            // Ordenação da tabela
+            const tableHeaders = document.querySelectorAll('th');
+            tableHeaders.forEach(header => {
+                header.addEventListener('click', () => {
+                    const table = header.parentElement.parentElement.parentElement;
+                    const columnIndex = Array.from(header.parentElement.children).indexOf(header);
+                    const rows = Array.from(table.querySelectorAll('tbody tr'));
+                    
+                    // Simulação de ordenação
+                    rows.sort((a, b) => {
+                        const aValue = a.children[columnIndex].textContent;
+                        const bValue = b.children[columnIndex].textContent;
+                        return aValue.localeCompare(bValue);
+                    });
+                    
+                    // Reinserir linhas ordenadas
+                    rows.forEach(row => table.querySelector('tbody').appendChild(row));
+                });
+            });
+
+            // Filtros
+            const applyFiltersBtn = document.querySelector('.filters .btn');
+            applyFiltersBtn.addEventListener('click', () => {
+                alert('Filtros aplicados! Em uma implementação real, os dados seriam filtrados conforme os critérios selecionados.');
+            });
+
+            // Exportar dados
+            const exportBtn = document.querySelector('.filters .btn-outline');
+            exportBtn.addEventListener('click', () => {
+                alert('Exportando dados de vendas... Em uma implementação real, um arquivo CSV seria gerado para download.');
+            });
+        });
+    </script>
+</body>
+</html>
